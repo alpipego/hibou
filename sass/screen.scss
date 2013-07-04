@@ -1,0 +1,53 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/utilities/general/clearfix";
+@import "compass/css3/transition";
+
+* {
+	box-sizing:border-box;
+}
+
+@mixin column() {
+	border:1px solid #ccc;
+	width: 2px;
+}
+
+#thing {
+	height: 200px;
+	width: 200px;
+	background-color: #000;
+}
+
+.hibou-container {
+	@include clearfix;
+}
+.hibou {
+	border-top: 1px dotted #ccc;
+	border-right: 1px dotted #ccc;
+	float:left;
+	&:first-of-type {
+		border-left: 1px dotted #ccc;
+	}
+}
+.hibou-row {
+	@include clearfix;
+	&.row-0 {
+		display:none;
+	}
+	&:last-of-type {
+		.hibou {
+			border-bottom:1px dotted #ccc;
+		}		
+	}
+}
+
+.hello {
+	position:absolute;
+	h1 {
+		display:inline;
+	}
+}
