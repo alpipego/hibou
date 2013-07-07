@@ -7,13 +7,39 @@
 @import "compass/utilities/general/clearfix";
 @import "compass/css3/transition";
 
+
+$black: #222;
+$red:#D84442;
+$orange:#D4AA58;
+$yellow:#DEDB62;
+$lightblue:#54C0D6;
+$blue:#45449E;
+$green:#7cc7a7;
 * {
 	box-sizing:border-box;
 }
 
-@mixin column() {
-	border:1px solid #ccc;
-	width: 2px;
+h1, h2, h3, h4, h5, h6 {
+	font-family:Georgia;
+}
+
+body {
+	font-family:Georgia;
+	position:relative;
+}
+
+a {
+	color:$yellow;
+	border-bottom:1px dotted $yellow;
+	text-decoration:none;
+	&:visited {
+		color:$orange;
+		border-bottom:1px dotted $orange;	
+	}
+	&:hover {
+		color:#CDF560;
+		border-bottom:1px dotted #CDF560;
+	}
 }
 
 #thing {
@@ -35,19 +61,66 @@
 }
 .hibou-row {
 	@include clearfix;
-	&.row-0 {
-		display:none;
-	}
 	&:last-of-type {
 		.hibou {
 			border-bottom:1px dotted #ccc;
 		}		
 	}
 }
-
 .hello {
 	position:absolute;
+	z-index: 0;
 	h1 {
+		font-size: 1em;
 		display:inline;
 	}
+}
+nav {
+	> ul {
+		> li {
+			position:absolute;
+			> ul {
+				display:none;
+				z-index:2;
+				> li {
+					position:absolute;
+					z-index:2;
+				}
+			}
+			&:hover {
+				ul {
+					display:block;
+				}
+			}
+		}
+	}
+}
+.arrow-up {
+	width:0px; 
+	height:0px; 
+	border-left:10px solid transparent;
+	border-right:10px solid transparent;
+	border-bottom:10px solid #fff;
+	font-size:0px;
+	line-height:0px;
+	position:absolute;
+	display:none;
+	pointer-events:none;
+}
+.arrow-down {
+	width:0px; 
+	height:0px; 
+	border-left:10px solid transparent;
+	border-right:10px solid transparent;
+	border-top:10px solid #fff;
+	font-size:0px;
+	line-height:0px;
+	position:absolute;
+	display:none;
+	pointer-events:none;
+}
+footer {
+	position:absolute;
+	text-align:right;
+	color:#fff;
 }
