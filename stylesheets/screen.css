@@ -118,62 +118,69 @@ a:hover {
   border-top: 1px dotted #ccc;
   border-right: 1px dotted #ccc;
   float: left;
+  position: relative;
+  z-index: 0;
 }
-/* line 59, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 .hibou:first-of-type {
   border-left: 1px dotted #ccc;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 .hibou-row {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 66, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 .hibou-row:last-of-type .hibou {
   border-bottom: 1px dotted #ccc;
 }
 
-/* line 71, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 .hello {
   position: absolute;
-  z-index: 0;
+  z-index: 1;
 }
-/* line 74, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 .hello h1 {
   font-size: 1em;
   display: inline;
+  position: relative;
 }
 
-/* line 81, ../sass/screen.scss */
-nav > ul > li {
-  position: absolute;
+/* line 82, ../sass/screen.scss */
+nav {
+  z-index: 1;
 }
-/* line 83, ../sass/screen.scss */
-nav > ul > li > ul {
-  display: none;
-  z-index: 2;
+/* line 84, ../sass/screen.scss */
+nav > ul {
+  z-index: 1;
 }
 /* line 86, ../sass/screen.scss */
+nav > ul > li {
+  position: absolute;
+  z-index: 1;
+}
+/* line 89, ../sass/screen.scss */
+nav > ul > li > ul {
+  display: none;
+  z-index: 1;
+}
+/* line 92, ../sass/screen.scss */
 nav > ul > li > ul > li {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
 }
 
-/* line 94, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 article {
   position: absolute;
   z-index: 0;
 }
-/* line 98, ../sass/screen.scss */
-article:nth-of-type(odd) .liquidImg {
-  left: 1px;
-}
-/* line 102, ../sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 article .liquidImg {
   z-index: -1;
   position: relative;
-  top: 1px !important;
 }
 
 /* line 109, ../sass/screen.scss */
@@ -188,11 +195,13 @@ article .liquidImg {
   position: absolute;
   display: none;
   pointer-events: none;
+  z-index: 1;
 }
 
-/* line 122, ../sass/screen.scss */
+/* line 123, ../sass/screen.scss */
 footer {
   position: absolute;
   text-align: right;
   color: #fff;
+  z-index: 1;
 }

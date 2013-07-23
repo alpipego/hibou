@@ -80,6 +80,73 @@
 			<img src="img/lemon.jpg" alt="" />
 		</div>
 	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/gifrocket.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/lemon.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/gifrocket.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/lemon.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/gifrocket.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/lemon.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/lemon.jpg" alt="" />
+		</div>
+	</article>
+	<article>
+		<h2></h2>
+		<div class="liquidImg imgLiquid">
+			<img src="img/lemon.jpg" alt="" />
+		</div>
+	</article>
+	
 	<footer>
 		<span>&copy; <a target="_blank" href="https://github.com/alpipego/hibou">hibou</a> | <a target="_blank" href="http://alpipego.com/">alpipego</a></span>
 	</footer>
@@ -113,12 +180,19 @@
 				window.cols = 2;
 			} else if(horiz < 641) {
 				window.cols = 4;
-			} else if(horiz < 1024) {
+			} else if(horiz >= 641) {
 				window.cols = 8;
-			} else if(horiz >= 1024) {
+			} 
+			/*else if(horiz >= 1024) {
 				window.cols = 12;
-			}
-			boxes = 48; 
+			}*/
+
+			articles = $('article').length;
+
+			boxes = (articles*4)+16;
+			if(boxes%8 != 0) {
+				boxes = boxes+4;
+			} 
 			rows = boxes/cols;
 
 			//margins and width of columns
@@ -161,12 +235,16 @@
 
 			var h1 = $('.hello h1').outerWidth(true); 
 			var hello = $('.hello').innerWidth();
+			console.log(hello);
 			$('.hello h1').css('font-size', hello/50 + 'em');
+			
+			var h1w = $('.hello h1').outerWidth(true);
+			var h1h = $('.hello h1').outerHeight(true);
+			var helloh = $('.hello').innerHeight();
 
-			$('.hello h1').position({
-				my:'center',
-				at:'center',
-				of:'.hello'
+			$('.hello h1').css({
+				'left':(hello-h1w)/2,
+				'top':(helloh-h1h)/2
 			});
 		};
 
@@ -238,10 +316,18 @@
 			fz = fz[fzLen];
 			$('nav>ul>li>span').css('font-size', li/(fz*1.5) + 'em');	
 
-			$('nav>ul>li:first-child span').position({my:'center',at:'center',of:'nav>ul>li:first-child'});
-			$('nav>ul>li:nth-child(2) span').position({my:'center',at:'center',of:'nav>ul>li:nth-child(2)'});
-			$('nav>ul>li:nth-child(3) span').position({my:'center',at:'center',of:'nav>ul>li:nth-child(3)'});
-			$('nav>ul>li:nth-child(4) span').position({my:'center',at:'center',of:'nav>ul>li:nth-child(4)'});
+			var li1spanW = $('nav>ul>li:first-child span').outerWidth(true);
+			var li2spanW = $('nav>ul>li:nth-child(2) span').outerWidth(true);
+			var li3spanW = $('nav>ul>li:nth-child(3) span').outerWidth(true);
+			var li4spanW = $('nav>ul>li:nth-child(4) span').outerWidth(true);
+			var lispanH = $('nav>ul>li:first-child span').outerHeight(true);
+
+			$('nav>ul>li span').css({'top':(colWidth-lispanH)/2,'position':'relative'});
+			$('nav>ul>li:first-child span').css('left', (colWidth-li1spanW)/2);
+			$('nav>ul>li:nth-child(2) span').css('left', (colWidth-li2spanW)/2);
+			$('nav>ul>li:nth-child(3) span').css('left', (colWidth-li3spanW)/2);
+			$('nav>ul>li:nth-child(4) span').css('left', (colWidth-li4spanW)/2);
+
 			$(nav).css('background-color', hRed);
 		}
 
@@ -307,39 +393,45 @@
 			}, 300);
 		}
 
-		//add style before document ready
 		function addImageSize() {
-			if(cols === 4) {
-				//zero counter --> odd is actually even
-				$('article:odd .liquidImg').css({'width':(colWidth*2)-1, 'height':colWidth-1});
-				$('article:even .liquidImg').css({'width':(colWidth*2)-2, 'height':colWidth-1});
-			} else if(cols === 8) {
-				$('article:even .liquidImg').css({'width':(colWidth*2)-1.5, 'height':(colWidth-1)+1});
-				$('article:odd .liquidImg').css({'width':(colWidth*2)-1.5, 'height':colWidth-1});
-				$('article:first-of-type .liquidImg').css({'width':(colWidth*2)-0.5, 'height':colWidth-1});
-			} else if(cols === 12) {
-				$('article:even .liquidImg').css({'width':(colWidth*2)-1.5, 'height':(colWidth-1)+1});
-				$('article:odd .liquidImg').css({'width':(colWidth*2)-0.5, 'height':colWidth-1});
-				$('article:first-of-type .liquidImg').css({'width':(colWidth*2)-0.5, 'height':colWidth-1});
-			}
+			//zero counter --> odd is actually even
+			$('article:odd .liquidImg').css({'width':(colWidth*2), 'height':colWidth});
+			$('article:even .liquidImg').css({'width':(colWidth*2), 'height':colWidth});
+		}
+
+		function isEven(value) {
+			return (value%2 == 0);
 		}
 
 		function positionArticle() {
-			if(cols === 4) {
-				$('article:nth-of-type(1)').css({'left': aFifth, 'top': colWidth*2});
-				$('article:nth-of-type(2)').css({'left': aFifth+colWidth*2, 'top': colWidth*2});
-				$('article:odd .liquidImg').css('left', 0);
-				$('article:even .liquidImg').css('left', 1);
+			if(cols === 2) {
+				var offset = 2;
+				for(nth = 1; nth <= articles; nth++) {
+					offset++;
+					$('article:nth-of-type('+nth+')').css({'left': aFifth, 'top': colWidth*(nth+offset)});					
+				}
+			} else if(cols === 4) {
+				for(nth = 1; nth <= articles; nth++) {
+					if(isEven(nth)){ 
+						var colOff = 2;
+					} else { 
+						var colOff = 0;
+						var rowOff = nth+1;
+					};
+					$('article:nth-of-type('+nth+')').css({'left': aFifth+(colWidth*(colOff)), 'top': colWidth*rowOff});
+				}
 			} else if(cols === 8) {
-				$('article:nth-of-type(1)').css({'left': aFifth+colWidth*6, 'top': 0});
-				$('article:nth-of-type(2)').css({'left': aFifth, 'top': colWidth*2});
-				$('article:odd .liquidImg').css('left', 1);
-				$('article:even .liquidImg').css('left', 0);
-			} else if(cols === 12) {
-				$('article:nth-of-type(1)').css({'left': aFifth+colWidth*6, 'top': 0});
-				$('article:nth-of-type(2)').css({'left': aFifth+colWidth*8, 'top': 0});
-				$('article .liquidImg').css('left', 0);
-				// $('article:even .liquidImg').css('left', 0);
+				offsetCounter = 0;
+				for(nth = 2; nth <= articles; nth++) {
+					if((nth+2)%4 == 0){
+						offsetCounter = offsetCounter+2;
+						var topOffset = offsetCounter;
+						var leftOffset = nth+nth;
+					}
+					$('article:nth-of-type('+nth+')').append(leftOffset + '/' + topOffset);
+					$('article:nth-of-type('+nth+')').css({'left': aFifth+(colWidth*((nth-leftOffset)+nth)), 'top': colWidth*topOffset});
+				}
+				$('article:first-of-type').css({'left': aFifth+colWidth*6, 'top': 0});
 			}
 		}
 
