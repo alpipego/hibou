@@ -89,18 +89,6 @@
 	<article>
 		<h2></h2>
 		<div class="liquidImg imgLiquid">
-			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/lemon.jpg" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
 			<img src="img/gifrocket.jpg" alt="" />
 		</div>
 	</article>
@@ -108,36 +96,6 @@
 		<h2></h2>
 		<div class="liquidImg imgLiquid">
 			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/lemon.jpg" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/gifrocket.jpg" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/nick-gentry-floppy-disk-art-5.png" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/lemon.jpg" alt="" />
-		</div>
-	</article>
-	<article>
-		<h2></h2>
-		<div class="liquidImg imgLiquid">
-			<img src="img/lemon.jpg" alt="" />
 		</div>
 	</article>
 	<article>
@@ -147,8 +105,10 @@
 		</div>
 	</article>
 	
+	
 	<footer>
-		<span>&copy; <a target="_blank" href="https://github.com/alpipego/hibou">hibou</a> | <a target="_blank" href="http://alpipego.com/">alpipego</a></span>
+		<div class="search"></div>
+		<div class="copy"><span>&copy; <a target="_blank" href="https://github.com/alpipego/hibou">hibou</a> <a target="_blank" href="http://alpipego.com/">alpipego</a></span></div>
 	</footer>
 
 	<div class="hibou-container" id="hibouContainer"></div>
@@ -175,26 +135,32 @@
 				orient = 'portrait';
 			}
 
+			articles = $('article').length;
+
 			//different columns depending on screen size
 			if(horiz < 321) {
 				window.cols = 2;
+				boxes = (articles*4)+16; 
+				rows = boxes/cols;
 			} else if(horiz < 641) {
 				window.cols = 4;
+				boxes = (articles*4)+16; 
+				rows = boxes/cols;	
 			} else if(horiz >= 641) {
 				window.cols = 8;
-			} 
-			/*else if(horiz >= 1024) {
-				window.cols = 12;
-			}*/
-
-			articles = $('article').length;
-
-			boxes = (articles*4)+16;
-			if(boxes%8 != 0) {
-				boxes = boxes+4;
-			} 
-			rows = boxes/cols;
-
+				boxes = (articles*4)+16;
+				if(boxes%8 != 0) {
+					boxes = boxes+4;
+				} 
+				rows = boxes/cols;
+				if(articles%2 == 0) {
+					if(rows%2 != 0) {
+						boxes = boxes+8;
+					}
+				}
+				rows = boxes/cols;
+			}			
+			console.log('Articles: '+articles+' Boxes: '+boxes+' Rows: '+rows);
 			//margins and width of columns
 			aFifth 		= Math.floor(horiz*0.04); 
 			horizM 		= horiz-aFifth*2;
@@ -235,7 +201,6 @@
 
 			var h1 = $('.hello h1').outerWidth(true); 
 			var hello = $('.hello').innerWidth();
-			console.log(hello);
 			$('.hello h1').css('font-size', hello/50 + 'em');
 			
 			var h1w = $('.hello h1').outerWidth(true);
@@ -253,16 +218,38 @@
 			var footerlrlc = boxes-1;
 			var footerlr2lc = boxes-2;
 			var bottomRight = '.hibou:eq('+footerlr2lc+'),.hibou:eq('+footerlrlc+')';
-			$('footer').css({'height': colWidth, 'width': colWidth*2, 'right': aFifth+rest, 'bottom': 0});
-			if( cols >= 4 ) {
+			$('footer').css({'right': aFifth+rest, 'bottom': 0});
+			if(cols === 2){
 				var footerlr3lc = boxes-3;
 				var footerlr4lc = boxes-4;
-				var bottomRight = '.hibou:eq('+footerlrlc+'),.hibou:eq('+footerlr2lc+'),.hibou:eq('+footerlr3lc+'),.hibou:eq('+footerlr4lc+')';
-				$('footer').css('width', colWidth*4);
+				$('footer').css({'height': colWidth*2, 'width': colWidth*2});
+			} else if( cols === 4 ) {
+				if(articles%2 != 0 && rows%2 != 0) {
+					var footerlr3lc = boxes-5;
+					var footerlr4lc = boxes-6;
+					$('footer').css({'width':colWidth*2, 'height':colWidth*2});
+				} else {
+					var footerlr3lc = boxes-3;
+					var footerlr4lc = boxes-4;
+					$('footer').css({'width':colWidth*4, 'height':colWidth});
+				}
+			} else if(cols === 8) {
+				if(articles%4 == 0) {
+					var footerlr3lc = boxes-9;
+					var footerlr4lc = boxes-10;
+					$('footer').css({'width':colWidth*2, 'height':colWidth*2});
+				} else {
+					var footerlr3lc = boxes-3;
+					var footerlr4lc = boxes-4;
+					$('footer').css({'width':colWidth*4, 'height':colWidth});
+				}
 			}
+			var bottomRight = '.hibou:eq('+footerlrlc+'),.hibou:eq('+footerlr2lc+'),.hibou:eq('+footerlr3lc+'),.hibou:eq('+footerlr4lc+')';
 			$(bottomRight).css('background-color', hBlack);
-			var spanHeight = $('footer span').outerHeight()+10;
-			$('footer span').css({'padding': '10px', 'top': colWidth-spanHeight, 'position': 'relative'});	
+			// var footerHeight = $('footer span').outerHeight()+10;
+			// console.log(colWidth + ' ' + footerHeight);
+			$('footer .copy').css({'position':'absolute', 'height': colWidth, 'width': colWidth, 'right':0, 'bottom':0, 'display':'inline-block'});
+			$('footer .search').css({'position':'relative', 'height': colWidth, 'width': colWidth*2, 'left': 0, 'top': 0, 'display':'inline-block'});	
 		}
 
 		//adding the navigation
@@ -332,24 +319,26 @@
 		}
 
 		function addTheSubNav() {
-			if(cols === 4) {
-				var subnav2r1c = cols;
-				var subnav2r2c = cols+1;
-				var subnav2r3c = cols+2;
-				var subnav2r4c = cols+3;
-
-				subnav = '.hibou:eq(' + subnav2r1c + '),.hibou:eq(' + subnav2r2c + '),.hibou:eq(' + subnav2r3c + '),.hibou:eq(' + subnav2r4c + ')';
-			} else if(cols > 4) {
-				subnav = '';
-			} else if(cols < 4) {
+			if(cols === 2) {
 				var subnav4r1c = cols+4;
 				var subnav4r2c = cols+5;
 				var subnav5r1c = cols+6;
 				var subnav5r2c = cols+7;
 
 				subnav = '.hibou:eq(' + subnav4r1c + '),.hibou:eq(' + subnav4r2c + '),.hibou:eq(' + subnav5r1c + '),.hibou:eq(' + subnav5r2c + ')';
-			}
-			$(subnav).hide();
+				$(subnav).hide();
+			} else if(cols === 4) {
+				var subnav2r1c = cols;
+				var subnav2r2c = cols+1;
+				var subnav2r3c = cols+2;
+				var subnav2r4c = cols+3;
+
+				subnav = '.hibou:eq(' + subnav2r1c + '),.hibou:eq(' + subnav2r2c + '),.hibou:eq(' + subnav2r3c + '),.hibou:eq(' + subnav2r4c + ')';
+				$(subnav).hide();
+			} else if(cols === 8) {
+				subnav = '';
+			} 
+			$(subnav).css('display', 'none');
 		}
 		function enterTheNavigation() {
 			if(cols > 4) {
@@ -428,7 +417,6 @@
 						var topOffset = offsetCounter;
 						var leftOffset = nth+nth;
 					}
-					$('article:nth-of-type('+nth+')').append(leftOffset + '/' + topOffset);
 					$('article:nth-of-type('+nth+')').css({'left': aFifth+(colWidth*((nth-leftOffset)+nth)), 'top': colWidth*topOffset});
 				}
 				$('article:first-of-type').css({'left': aFifth+colWidth*6, 'top': 0});
@@ -445,7 +433,7 @@
 
 		//actual execution
 		$(document).ready(function(){
-			specs();
+			// specs();
 			calculateColumns();
 			addTheLogo();
 			$('.hibou-row').css('min-width', horiz);
