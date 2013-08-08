@@ -6,6 +6,7 @@
 @import "compass/reset";
 @import "compass/utilities/general/clearfix";
 @import "compass/css3/transition";
+@import "mixins";
 
 
 $black: #222;
@@ -86,6 +87,10 @@ nav {
 		> li {
 			position:absolute;
 			z-index:1;
+			@include  text-select();
+			span {
+				pointer-events:none;
+			}
 			> ul {
 				display:none;
 				z-index:1;
@@ -124,4 +129,69 @@ footer {
 	position:absolute;
 	color:#fff;
 	z-index:1;
+}
+
+// ICON FONT
+ 
+/* Just click to select the code */
+ 
+@charset "UTF-8";
+ 
+@font-face {
+  font-family: "hibou";
+  src:url("../fonts/hibou.eot");
+  src:url("../fonts/hibou.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/hibou.ttf") format("truetype"),
+    url("../fonts/hibou.svg#hibou") format("svg"),
+    url("../fonts/hibou.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+[data-icon]:before {
+  font-family: "hibou";
+  content: attr(data-icon);
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+ 
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "hibou";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+} 
+ 
+.icon-arrow-1-left:before {
+   content: "a"; 
+} 
+ 
+.icon-arrow-1-right:before {
+   content: "b"; 
+} 
+ 
+.icon-arrow-left:before {
+   content: "c"; 
+} 
+ 
+.icon-arrow-right:before {
+   content: "d"; 
+} 
+ 
+.icon-arrow-1-up:before {
+   content: "e"; 
+} 
+ 
+.icon-arrow-1-down:before {
+   content: "f"; 
+} 
+ 
+.icon-search:before {
+   content: "g"; 
 }

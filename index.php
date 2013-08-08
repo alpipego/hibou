@@ -107,7 +107,9 @@
 	
 	
 	<footer>
-		<div class="search"></div>
+		<div class="search">
+			<div class="icon-search"></div>
+		</div>
 		<div class="copy"><span>&copy; <a target="_blank" href="https://github.com/alpipego/hibou">hibou</a> <a target="_blank" href="http://alpipego.com/">alpipego</a></span></div>
 	</footer>
 
@@ -246,9 +248,18 @@
 			}
 			var bottomRight = '.hibou:eq('+footerlrlc+'),.hibou:eq('+footerlr2lc+'),.hibou:eq('+footerlr3lc+'),.hibou:eq('+footerlr4lc+')';
 			$(bottomRight).css('background-color', hBlack);
-			// var footerHeight = $('footer span').outerHeight()+10;
-			// console.log(colWidth + ' ' + footerHeight);
-			$('footer .copy').css({'position':'absolute', 'height': colWidth, 'width': colWidth, 'right':0, 'bottom':0, 'display':'inline-block'});
+			
+			var footerText = $('footer .copy').text();
+			var footerHtml = $('footer .copy').html();
+
+			var footerArray = footerText.split(' ');
+			for( i=0; i<footerArray.length; i++) {
+				console.log(footerArray[i]);
+				var length = footerArray[i].length;
+			}
+			console.log(footerArray);
+
+			$('footer .copy').css({'position':'absolute', 'height': colWidth, 'width': colWidth, 'right':0, 'bottom':0, 'display':'inline-block','text-align':'center'});
 			$('footer .search').css({'position':'relative', 'height': colWidth, 'width': colWidth*2, 'left': 0, 'top': 0, 'display':'inline-block'});	
 		}
 
@@ -341,19 +352,13 @@
 			$(subnav).css('display', 'none');
 		}
 		function enterTheNavigation() {
-			if(cols > 4) {
+			if (cols === 8) {
 				$(subnav).fadeIn('fast');
 				for(var i = 1; i < 5; ++i) {
 					$('nav>ul>li:nth-child('+liIndex+')>ul>li:nth-child('+i+')').css({'top': colWidth, 'left': colWidth*(i-liIndex)});
 				}
-				$('#cssArrowUp').css('display','block').position({
-					my:'center bottom',
-					at:'center bottom',
-					of:'nav>ul>li:nth-of-type('+liIndex+')'
-				});
+				$('#cssArrowUp').css({'display':'block','top':colWidth-10,'left':(colWidth*2)+(colWidth*(liIndex-1))+(colWidth/2)+aFifth-10});
 				$('nav>ul>li:nth-child('+liIndex+')>ul').css('display', 'block');
-			} else if( cols <= 4 )  {
-				$('nav>ul>li>:nth-child('+liIndex+')>ul').css('display', 'none');
 			}
 		}
 		function exitTheNavigation() {
